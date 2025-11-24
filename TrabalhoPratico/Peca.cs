@@ -9,17 +9,26 @@ namespace TrabalhoPratico
     internal class Peca
     {
         private int[,] pecaI = { { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 0 } };
-        private int[,] l = { { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 1 } };
-        private int[,] t = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 } };
+        private int[,] pecaL = { { 0, 1, 0 }, { 0, 1, 0 }, { 0, 1, 1 } };
+        private int[,] pecaT = { { 1, 1, 1 }, { 0, 1, 0 }, { 0, 1, 0 } };
         Tabuleiro tabuleiro = new Tabuleiro();
 
 
 
-        public int posX = 0, posY = 3;
-        char tipo;
+        private int posX = 17, posY = 0;
+        private char tipo;
         int pontos;
-        int[,] forma = new int[3, 3];
+        private int[,] forma = new int[3, 3];
         int[,] matInvert = new int[3, 3];
+
+        public int[,] PecaI { get => pecaI;}
+        public int[,] PecaL { get => pecaL;}
+        public int[,] PecaT { get => pecaT;}
+        public char Tipo { get => tipo;}
+        public int PosX { get => posX; }
+        public int PosY { get => posY;}
+        public int[,] Forma { get => forma;}
+
         public void GerarPeca()
         {
             Random r = new Random();
@@ -31,8 +40,9 @@ namespace TrabalhoPratico
                     for (int i = 0; i < 3; i++)
                     {
                         for (int j = 0; j < 3; j++)
-                            forma[i, j] = pecaI[i, j];
+                            Forma[i, j] = PecaI[i, j];                           
                     }
+                    tipo = 'I';
 
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
@@ -40,18 +50,18 @@ namespace TrabalhoPratico
                     for (int i = 0; i < 3; i++)
                     {
                         for (int j = 0; j < 3; j++)
-                            forma[i, j] = t[i, j];
+                            Forma[i, j] = PecaT[i, j];
                     }
-
+                    tipo = 'T';
                     Console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case 3:
                     for (int i = 0; i < 3; i++)
                     {
                         for (int j = 0; j < 3; j++)
-                            forma[i, j] = l[i, j];
+                            Forma[i, j] = PecaL[i, j];
                     }
-
+                    tipo = 'L';
                     Console.ForegroundColor = ConsoleColor.Blue;
                     break;
             }
@@ -64,7 +74,7 @@ namespace TrabalhoPratico
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    matInvert[i, 2 - j] = forma[j, i];
+                    matInvert[i, 2 - j] = Forma[j, i];
 
                 }
             }
@@ -74,7 +84,7 @@ namespace TrabalhoPratico
                 for (int j = 0; j < matInvert.GetLength(1); j++)
                 {
                     Console.Write($"{matInvert[i, j]} ");
-                    forma[i, j] = matInvert[i, j];
+                    Forma[i, j] = matInvert[i, j];
                 }
                 Console.WriteLine();
             }
@@ -85,7 +95,7 @@ namespace TrabalhoPratico
             {
                 for (int i = 0; i < 3; i++)
                 {
-                    matInvert[2 - j, i] = forma[i, j];
+                    matInvert[2 - j, i] = Forma[i, j];
                 }
             }
 
@@ -94,14 +104,14 @@ namespace TrabalhoPratico
                 for (int j = 0; j < matInvert.GetLength(1); j++)
                 {
                     Console.Write($"{matInvert[i, j]} ");
-                    forma[i, j] = matInvert[i, j];
+                    Forma[i, j] = matInvert[i, j];
                 }
                 Console.WriteLine();
             }
         }
         void MoverEsquerda()
         {
-            if (posX > 0)
+            if (PosX > 0)
             {
                 posX--;
 
@@ -109,15 +119,15 @@ namespace TrabalhoPratico
         }
         void MoverDireita()
         {
-            if (posX < 8)
+            if (PosX < 8)
             {
                 posX++;
-                tabuleiro.Limpar(forma);
+                tabuleiro.Limpar(Forma);
             }
         }
         void MoverBaixo()
         {
-            if (posY < 18)
+            if (PosY < 18)
             {
                 posY--;
 

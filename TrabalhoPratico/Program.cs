@@ -28,9 +28,10 @@ Registro de pontuação: gravar o nome do jogador e sua respectiva pontuação f
         {
             Peca p1 = new Peca();
             p1.GerarPeca();
+            Tabuleiro t1 = new Tabuleiro();
 
 
-            Console.WriteLine("----- Anti Horário -----");
+            /*Console.WriteLine("----- Anti Horário -----");
             Console.WriteLine();
             p1.RotacionarAntiHorario();
             Console.WriteLine();
@@ -40,7 +41,11 @@ Registro de pontuação: gravar o nome do jogador e sua respectiva pontuação f
             Console.WriteLine();
             p1.RotacionarAntiHorario();
             Console.WriteLine();
-            Console.ResetColor();
+            Console.ResetColor();*/
+
+            t1.PodeInserir(p1);
+            t1.InserirPeca(p1);
+            t1.Renderizar();
         }
     }
 }

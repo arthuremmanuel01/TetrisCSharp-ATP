@@ -15,19 +15,20 @@ namespace TrabalhoPratico
 
 
 
-        private int posX = 17, posY = 0;
+        private int posX = 0, posY = 3;
         private char tipo;
-        int pontos;
+        private int pontos;
         private int[,] forma = new int[3, 3];
-        int[,] matInvert = new int[3, 3];
+        private int[,] matInvert = new int[3, 3];
 
         public int[,] PecaI { get => pecaI;}
         public int[,] PecaL { get => pecaL;}
         public int[,] PecaT { get => pecaT;}
         public char Tipo { get => tipo;}
-        public int PosX { get => posX; }
-        public int PosY { get => posY;}
         public int[,] Forma { get => forma;}
+        public int PosX { get => posX; set => posX = value; }
+        public int PosY { get => posY; set => posY = value; }
+        public int Pontos { get => pontos; set => pontos = value; }
 
         public void GerarPeca()
         {
@@ -43,7 +44,6 @@ namespace TrabalhoPratico
                             Forma[i, j] = PecaI[i, j];                           
                     }
                     tipo = 'I';
-
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case 2:
@@ -63,6 +63,25 @@ namespace TrabalhoPratico
                     }
                     tipo = 'L';
                     Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                default:
+                    break;
+            }
+
+            switch (tipo)
+            {
+                case 'I':
+                    pontos = 3;
+                    break;
+
+                case 'T':
+                    pontos = 5;
+                    break;
+
+                case 'L':
+                    pontos = 4;
+                    break;
+                default:
                     break;
             }
         }
@@ -109,51 +128,21 @@ namespace TrabalhoPratico
                 Console.WriteLine();
             }
         }
-        void MoverEsquerda()
+        public void MoverEsquerda()
         {
-            if (PosX > 0)
-            {
-                posX--;
-
-            }
+            PosY--;
         }
-        void MoverDireita()
+        public void MoverDireita()
         {
-            if (PosX < 8)
-            {
-                posX++;
-                tabuleiro.Limpar(Forma);
-            }
+            PosY++;
         }
-        void MoverBaixo()
+        public void MoverBaixo()
         {
-            if (PosY < 18)
-            {
-                posY--;
-
-            }
+            PosX++;
+        }
+        public void MoverCima()
+        {
+            PosX--;
         }
     }
 }
-
-/*Dica da Professora:
- * ConsoleKeyInfo tecla = Console.ReadKey(true);
-switch (tecla.Key)
-{
-case ConsoleKey.LeftArrow:
-Console.WriteLine("Seta para ESQUERDA pressionada");
-break;
-case ConsoleKey.RightArrow:
-Console.WriteLine("Seta para DIREITA pressionada");
-break;
-case ConsoleKey.DownArrow:
-Console.WriteLine("Seta para BAIXO pressionada");
-break;
-case ConsoleKey.A:
-Console.WriteLine("A pressionada");
-break;
-case ConsoleKey.H:
-Console.WriteLine("H pressionada");
-break;
-}
-*/ 

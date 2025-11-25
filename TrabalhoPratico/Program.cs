@@ -26,26 +26,8 @@ Registro de pontuação: gravar o nome do jogador e sua respectiva pontuação f
     {
         static void Main(string[] args)
         {
-            Peca p1 = new Peca();
-            p1.GerarPeca();
-            Tabuleiro t1 = new Tabuleiro();
-
-
-            /*Console.WriteLine("----- Anti Horário -----");
-            Console.WriteLine();
-            p1.RotacionarAntiHorario();
-            Console.WriteLine();
-            p1.RotacionarAntiHorario();
-            Console.WriteLine();
-            p1.RotacionarAntiHorario();
-            Console.WriteLine();
-            p1.RotacionarAntiHorario();
-            Console.WriteLine();
-            Console.ResetColor();*/
-
-            t1.PodeInserir(p1);
-            t1.InserirPeca(p1);
-            t1.Renderizar();
+            Jogo jogo = new Jogo();
+            jogo.Iniciar();
         }
     }
 }

@@ -9,20 +9,8 @@ namespace TrabalhoPratico
 {
     internal class Tabuleiro
 
-    // Atributos: 
-    //  int[,] matriz – matriz de dimensões fixas (20 linhas × 10 colunas
-
-    // Métodos:
-    // - bool PodeInserir(Peca peca) – Verifica se a peça pode ser posicionada na matriz, considerando colisões e limites.
-    // - void InserirPeca(Peca peca) – Posiciona a nova peça no topo da matriz, centralizada horizontalmente.
-    // - void Limpar(Peca peca) – Remove a representação da peça da matriz, substituindo suas células por “vazios”.
-    // - void Atualizar(Peca peca) – Insere a peça na nova posição após movimentação.
-    // - void VerificarLinhas(Peca peca) – Identifica linhas completamente preenchidas, remove-as e desloca as superiores para baixo
-    // - void Renderizar() – Exibe o estado atual do tabuleiro no console.
-
-
     {
-        public int[,] matriz = {
+        private int[,] matriz = {
             { 2, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
             { 2, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
             { 2, 0, 0, 0, 0, 0, 0, 0, 0, 2 },
@@ -47,7 +35,18 @@ namespace TrabalhoPratico
 
         private int linhasFormadas = 0;
 
-        public int LinhasFormadas { get => linhasFormadas; set => linhasFormadas = value; }
+        public int LinhasFormadas
+        {
+            get
+            {
+                return linhasFormadas;
+            }
+            set
+            {
+                linhasFormadas = value;
+            }
+        }
+        
 
         public bool PodeInserir(Peca peca)
         {
@@ -73,7 +72,7 @@ namespace TrabalhoPratico
 
             if (cont == 0)
             {
-                
+
                 return true;
             }
             else
@@ -82,22 +81,22 @@ namespace TrabalhoPratico
             }
         }
 
-        public void InserirPeca(Peca peca) 
+        public void InserirPeca(Peca peca)
         {
-            
-            for (int i = 0, posX = 0; i < peca.Forma.GetLength(0); i++, posX++) //peca[0,0] - matriz[0,3] ++ peca[0,1] - matriz[0,4]
+
+            for (int i = 0, posX = 0; i < peca.Forma.GetLength(0); i++, posX++)
+            {
+                for (int j = 0, posY = 3; j < peca.Forma.GetLength(1); j++, posY++)
                 {
-                    for (int j = 0, posY = 3; j < peca.Forma.GetLength(1); j++, posY++) // j = 3 = posy; j < 3 + 3 = pecay; j++
+                    if (peca.Forma[i, j] == 1)
                     {
-                        if (peca.Forma[i, j] == 1) //Forma[3, 3]
-                        { 
-                            matriz[posX, posY] = 1; //matriz[1,3] = 1
-                        }
+                        matriz[posX, posY] = 1;
                     }
                 }
+            }
         }
 
-        public void Limpar(Peca peca) 
+        public void Limpar(Peca peca)
         {
             for (int posX = peca.PosX, i = 0; i < peca.Forma.GetLength(0); i++, posX++)
             {
@@ -110,32 +109,32 @@ namespace TrabalhoPratico
                 }
             }
         }
-        public void Atualizar(Peca peca) 
+        public void Atualizar(Peca peca)
         {
-            for (int i = 0, posX = peca.PosX; i < peca.Forma.GetLength(0); i++, posX++) //peca[0,0] - matriz[0,3] ++ peca[0,1] - matriz[0,4]
+            for (int i = 0, posX = peca.PosX; i < peca.Forma.GetLength(0); i++, posX++)
             {
-                for (int j = 0, posY = peca.PosY; j < peca.Forma.GetLength(1); j++, posY++) // j = 3 = posy; j < 3 + 3 = pecay; j++
+                for (int j = 0, posY = peca.PosY; j < peca.Forma.GetLength(1); j++, posY++)
                 {
-                    if (peca.Forma[i, j] == 1) //Forma[3, 3]
+                    if (peca.Forma[i, j] == 1)
                     {
-                        matriz[posX, posY] = 1; //matriz[1,3] = 1
+                        matriz[posX, posY] = 1;
                     }
                 }
             }
         }
 
-        public void VerificarLinhas(Peca peca) 
+        public void VerificarLinhas(Peca peca)
         {
             int cont = 0;
             int linhaFormada;
-            
 
-            for(int i = 0; i < matriz.GetLength(0); i++)
+
+            for (int i = 0; i < matriz.GetLength(0); i++)
             {
 
-                for(int j = 1; j < matriz.GetLength(1); j++)
+                for (int j = 1; j < matriz.GetLength(1); j++)
                 {
-                    if (matriz[i,j] == 1)
+                    if (matriz[i, j] == 1)
                     {
                         cont++;
                     }
@@ -146,9 +145,9 @@ namespace TrabalhoPratico
                     LinhasFormadas++;
                     int[,] matrizCopia = new int[20, 10];
 
-                    for(int w = 0; w < matriz.GetLength(0); w++)
+                    for (int w = 0; w < matriz.GetLength(0); w++)
                     {
-                        for(int h = 0; h < matriz.GetLength(1); h++)
+                        for (int h = 0; h < matriz.GetLength(1); h++)
                         {
                             matrizCopia[w, h] = matriz[w, h];
                         }
@@ -158,7 +157,7 @@ namespace TrabalhoPratico
                     {
                         matriz[linhaFormada, k] = 0;
                     }
-                    for (int w = 1; w < matriz.GetLength(0) - 1; w++)
+                    for (int w = linhaFormada; w > 1; w--)
                     {
                         for (int h = 1; h < matriz.GetLength(1) - 1; h++)
                         {
@@ -168,33 +167,35 @@ namespace TrabalhoPratico
                 }
                 cont = 0;
             }
-            
-           
         }
+
         public void Renderizar()
         {
-            
             for (int i = 0; i < matriz.GetLength(0); i++)
             {
                 for (int j = 0; j < matriz.GetLength(1); j++)
                 {
                     if (matriz[i, j] == 0)
                     {
-                        Console.Write(" .");
+                        Console.Write("  ");
                     }
                     else if (matriz[i, j] == 2)
                     {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write(" O");
+                        Console.ResetColor();
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Green;
                         Console.Write(" X");
+                        Console.ResetColor();
                     }
 
                 }
                 Console.WriteLine();
             }
         }
-            
+
     }
 }

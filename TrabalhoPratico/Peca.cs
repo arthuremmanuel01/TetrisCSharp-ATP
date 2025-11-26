@@ -21,14 +21,73 @@ namespace TrabalhoPratico
         private int[,] forma = new int[3, 3];
         private int[,] matInvert = new int[3, 3];
 
-        public int[,] PecaI { get => pecaI;}
-        public int[,] PecaL { get => pecaL;}
-        public int[,] PecaT { get => pecaT;}
-        public char Tipo { get => tipo;}
-        public int[,] Forma { get => forma;}
-        public int PosX { get => posX; set => posX = value; }
-        public int PosY { get => posY; set => posY = value; }
-        public int Pontos { get => pontos; set => pontos = value; }
+        public int[,] PecaI
+        {
+            get
+            {
+                return pecaI;
+            }
+        }
+        public int[,] PecaL 
+        {
+            get
+            {
+                return pecaL;
+            }
+        }
+        public int[,] PecaT
+        {
+            get
+            {
+                return pecaT;
+            }
+        }
+        public char Tipo 
+        {
+            get
+            {
+                return tipo;
+            }
+        }
+        public int[,] Forma 
+        {
+            get
+            {
+                return forma;
+            }
+        }
+        public int PosX 
+        {
+            get
+            {
+                return posX;
+            }
+            set
+            {
+                posX = value;
+            } 
+        }
+        public int PosY {
+            get
+            {
+                return posY;
+            }
+            set
+            {
+                posY = value;
+            }
+        }
+        public int Pontos {
+            get
+            {
+                return pontos;
+            }
+            set
+            {
+                pontos = value;
+            } 
+        }
+
 
         public void GerarPeca()
         {
@@ -44,7 +103,6 @@ namespace TrabalhoPratico
                             Forma[i, j] = PecaI[i, j];                           
                     }
                     tipo = 'I';
-                    Console.ForegroundColor = ConsoleColor.Yellow;
                     break;
                 case 2:
                     for (int i = 0; i < 3; i++)
@@ -53,7 +111,6 @@ namespace TrabalhoPratico
                             Forma[i, j] = PecaT[i, j];
                     }
                     tipo = 'T';
-                    Console.ForegroundColor = ConsoleColor.Red;
                     break;
                 case 3:
                     for (int i = 0; i < 3; i++)
@@ -62,7 +119,6 @@ namespace TrabalhoPratico
                             Forma[i, j] = PecaL[i, j];
                     }
                     tipo = 'L';
-                    Console.ForegroundColor = ConsoleColor.Blue;
                     break;
                 default:
                     break;
@@ -102,10 +158,8 @@ namespace TrabalhoPratico
             {
                 for (int j = 0; j < matInvert.GetLength(1); j++)
                 {
-                    Console.Write($"{matInvert[i, j]} ");
                     Forma[i, j] = matInvert[i, j];
                 }
-                Console.WriteLine();
             }
         }
         public void RotacionarAntiHorario()
@@ -122,10 +176,8 @@ namespace TrabalhoPratico
             {
                 for (int j = 0; j < matInvert.GetLength(1); j++)
                 {
-                    Console.Write($"{matInvert[i, j]} ");
                     Forma[i, j] = matInvert[i, j];
                 }
-                Console.WriteLine();
             }
         }
         public void MoverEsquerda()

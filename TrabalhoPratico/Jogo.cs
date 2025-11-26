@@ -27,11 +27,6 @@ namespace TrabalhoPratico
 
             tabuleiro.Renderizar();
 
-
-            //Nome do Jogador:
-            //Pontuação atual:
-            //Matriz do tabuleiro
-
             bool acabou = false;
 
             while (acabou == false)
@@ -103,8 +98,10 @@ namespace TrabalhoPratico
                             else
                             {
                                 acabou = true;
+                                Console.Clear();
                                 Console.WriteLine($"Nome do Jogador: {j1.Nome}");
                                 Console.WriteLine($"Pontuação: {j1.PontuacaoFinal}");
+                                j1.Salvar("pontuacoes.txt");
                             }
                             
                         }
@@ -117,7 +114,12 @@ namespace TrabalhoPratico
                         {
                             tabuleiro.Atualizar(pecaAtual);
                         }
-                        break;
+                        else
+                        {
+                            pecaAtual.RotacionarAntiHorario();
+                            tabuleiro.Atualizar(pecaAtual);
+                        }
+                            break;
                     case ConsoleKey.H:
                         tabuleiro.Limpar(pecaAtual);
                         pecaAtual.RotacionarAntiHorario();
@@ -126,10 +128,16 @@ namespace TrabalhoPratico
                         {
                             tabuleiro.Atualizar(pecaAtual);
                         }
+                        else
+                        {
+                            pecaAtual.RotacionarHorario();
+                            tabuleiro.Atualizar(pecaAtual);
+                        }
                         break;
                 }
                 if(acabou == false)
                 {
+                    Console.Clear();
                     tabuleiro.Renderizar();
                 }
                 
